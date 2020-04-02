@@ -1,4 +1,5 @@
 import React from 'react';
+// import axios from 'axios';
 import {Switch, Route} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 import Form from './components/Form'
@@ -14,7 +15,10 @@ class App extends React.Component {
     currentEpisode: null
   }
 
+
+
   componentDidMount() {
+    const axios = require('axios').default
     console.log(this.state.episodes)
   }
 
