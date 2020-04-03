@@ -1,37 +1,100 @@
 import React from 'react';
-// import axios from 'axios';
 import {Switch, Route} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 import Form from './components/Form'
 import NavBar from './components/NavBar'
 import Home from './components/Home'
-import ProfileContainer from './ProfileComponents/ProfileContainer'
+import ProfileContainer from './ProfileComponents/ProfileContainer.js'
 import './style.css'
 
 class App extends React.Component {
 
-  state = {
-    episodes: [],
-    currentEpisode: null
+  state={
+    user: {
+      id: 0,
+      username: "",
+      episodes: []
+    }
   }
 
 
+  handleLoginSubmit = (userInfo) => {
+    console.log("login data submitted")
 
-  componentDidMount() {
-    const axios = require('axios').default
-    console.log(this.state.episodes)
+    fetch('http://localhost:3000/login', {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(userInfo)
+    })
+    .then(r => r.json())
+    .then((loginData) => {
+      if (loginData.id) {
+        this.setState({
+          user: loginData
+        }, () => {
+          this.props.history.push("/profile")
+        })
+      } else {
+        alert(loginData.error)
+      }
+
+    })
+
+  }
+  
+  handleRegisterSubmit = (userInfo) => {
+    console.log("register data submitted")
+
+    fetch('http://localhost:3000/users', {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        username: userInfo.username,
+        password: userInfo.password
+      })
+    })
+    .then(r => r.json())
+    .then((registeredUser) => {
+      this.setState({
+        user: registeredUser
+      }, () => {
+        this.props.history.push("/profile")
+      })
+    })
   }
 
+  renderForm = (routerProps) => {
+    if(routerProps.location.pathname === "/login") {
+      return <Form formName="Login Form" handleSubmit={this.handleLoginSubmit} />
+    } else if (routerProps.location.pathname === "/register") {
+      return <Form formName="Register Form" handleSubmit={this.handleRegisterSubmit} />
+    }
+  }
+
+  renderProfile = (routerProps) => {
+    return <ProfileContainer user={this.state.user} />
+  }
 
   render() {
     return (
       <div>
         <h1 className="heaader" >Rabbit Hole Radio</h1>
-        <NewEpisodeForm episodes={this.state.episodes} />
+        <NavBar />
+        <Switch>
+          <Route />
+          <Route />
+          <Route />
+          <Route />
+          <Route />
+        </Switch>
       </div>
 
     )
   }
 }
 
-export default App;
+export default withRouter(App);
