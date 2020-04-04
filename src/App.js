@@ -85,10 +85,10 @@ class App extends React.Component {
         <h1 className="heaader" >Rabbit Hole Radio</h1>
         <NavBar />
         <Switch>
-          <Route />
-          <Route />
-          <Route />
-          <Route />
+          <Route path="/login" render={this.renderForm} />
+          <Route path="/register" render={this.renderForm} />
+          <Route path="/profile" render={this.renderProfile} />
+          <Route path="/" exact render={() => <p>Page not Found</p>} />
           <Route />
         </Switch>
       </div>
