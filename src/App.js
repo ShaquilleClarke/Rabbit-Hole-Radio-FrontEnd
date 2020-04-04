@@ -1,9 +1,9 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
-import Form from './components/Form'
-import NavBar from './components/NavBar'
-import Home from './components/Home'
+import Form from './Components/Form.js'
+import NavBar from './Components/NavBar.js'
+import Home from './Components/Home.js'
 import ProfileContainer from './ProfileComponents/ProfileContainer.js'
 import './style.css'
 
@@ -88,8 +88,8 @@ class App extends React.Component {
           <Route path="/login" render={this.renderForm} />
           <Route path="/register" render={this.renderForm} />
           <Route path="/profile" render={this.renderProfile} />
-          <Route path="/" exact render={() => <p>Page not Found</p>} />
-          <Route />
+          <Route path="/" exact render={() => <Home />} />
+          <Route render={() => <p>Page not Found</p>} />
         </Switch>
       </div>
 
