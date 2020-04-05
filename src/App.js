@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
-import Form from './Components/Form.js'
+import FormContainer from './Components/FormContainer.js'
 import NavBar from './Components/NavBar.js'
 import Home from './Components/Home.js'
 import ProfileContainer from './ProfileComponents/ProfileContainer.js'
@@ -17,11 +17,10 @@ class App extends React.Component {
     }
   }
 
-
   handleLoginSubmit = (userInfo) => {
-    console.log("login data submitted")
+    console.log("Login form has been submitted")
 
-    fetch('http://localhost:3000/login', {
+    fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -29,25 +28,26 @@ class App extends React.Component {
       body: JSON.stringify(userInfo)
     })
     .then(r => r.json())
-    .then((loginData) => {
-      if (loginData.id) {
+    .then((resp) => {
+
+      if (resp.id) {
         this.setState({
-          user: loginData
+          user: resp
         }, () => {
           this.props.history.push("/profile")
         })
       } else {
-        alert(loginData.error)
+        alert(resp.error)
       }
 
     })
 
-  }
-  
-  handleRegisterSubmit = (userInfo) => {
-    console.log("register data submitted")
 
-    fetch('http://localhost:3000/users', {
+  }
+
+  handleRegisterSubmit = (userInfo) => {
+    console.log("Register form has been submitted")
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -59,41 +59,45 @@ class App extends React.Component {
     })
     .then(r => r.json())
     .then((registeredUser) => {
+
       this.setState({
         user: registeredUser
       }, () => {
         this.props.history.push("/profile")
       })
+
     })
+
+
+
   }
 
   renderForm = (routerProps) => {
-    if(routerProps.location.pathname === "/login") {
-      return <Form formName="Login Form" handleSubmit={this.handleLoginSubmit} />
+    if(routerProps.location.pathname === "/login"){
+      return <FormContainer formName="Login Form" handleSubmit={this.handleLoginSubmit}/>
     } else if (routerProps.location.pathname === "/register") {
-      return <Form formName="Register Form" handleSubmit={this.handleRegisterSubmit} />
+      return <FormContainer formName="Register Form" handleSubmit={this.handleRegisterSubmit}/>
     }
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer user={this.state.user} />
+    return <ProfileContainer user={this.state.user}/>
   }
 
-  render() {
+  render(){
+    console.log(this.state.user);
     return (
-      <div>
-        <h1 className="heaader" >Rabbit Hole Radio</h1>
-        <NavBar />
+      <div className="App">
+        <NavBar/>
         <Switch>
-          <Route path="/login" render={this.renderForm} />
-          <Route path="/register" render={this.renderForm} />
-          <Route path="/profile" render={this.renderProfile} />
-          <Route path="/" exact render={() => <Home />} />
-          <Route render={() => <p>Page not Found</p>} />
+          <Route path="/login" render={ this.renderForm } />
+          <Route path="/register" render={ this.renderForm } />
+          <Route path="/profile" render={ this.renderProfile } />
+          <Route path="/" exact render={() => <Home /> } />
+          <Route render={ () => <p>Page not Found</p> } />
         </Switch>
       </div>
-
-    )
+    );
   }
 }
 

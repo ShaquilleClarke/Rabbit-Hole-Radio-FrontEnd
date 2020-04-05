@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 
 class Segments extends Component {
+
+    state = {
+        segments: []
+    }
     render() {
         return (
             <div>

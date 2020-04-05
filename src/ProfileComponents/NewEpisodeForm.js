@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Segments from './Segments.js'
 
-class Form extends Component {
+class NewEpisodeForm extends Component {
 
     addNewSegment = (segState) => {
         console.log(segState)
@@ -17,4 +17,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default NewEpisodeForm;
