@@ -14,7 +14,44 @@ class App extends React.Component {
       id: 0,
       username: "",
       episodes: []
+    },
+    token: ""
+  }
+
+  componentDidMount() {
+    if (localStorage.token) {
+      fetch('http://localhost:3000/persist', {
+        headers: {
+          "Authorization": `bearer ${localStorage.token}`
+        }
+      })
+      .then(r => r.json())
+      .then(this.handleResp)
     }
+  }
+
+  handleResp = (resp) => {
+    if (resp.user) {
+      localStorage.token = resp.token
+      this.setState({
+        user: resp.user,
+        token: resp.token
+      }, () => {
+        this.props.history.push("/profile")
+      })
+    } else {
+      alert(resp.error)
+    }
+  }
+
+  addNewEpisode = (epData) => {
+
+    this.setState({
+      user: {
+        ...this.state.user,
+        episodes: [...this.state.user.episodes, epData]
+      }
+    })
   }
 
   handleLoginSubmit = (userInfo) => {
@@ -28,19 +65,7 @@ class App extends React.Component {
       body: JSON.stringify(userInfo)
     })
     .then(r => r.json())
-    .then((resp) => {
-
-      if (resp.id) {
-        this.setState({
-          user: resp
-        }, () => {
-          this.props.history.push("/profile")
-        })
-      } else {
-        alert(resp.error)
-      }
-
-    })
+    .then(this.handleResp)
 
 
   }
@@ -58,19 +83,13 @@ class App extends React.Component {
       })
     })
     .then(r => r.json())
-    .then((registeredUser) => {
-
-      this.setState({
-        user: registeredUser
-      }, () => {
-        this.props.history.push("/profile")
-      })
-
-    })
-
-
-
+    .then(this.handleResp)
   }
+
+
+
+
+  
 
   renderForm = (routerProps) => {
     if(routerProps.location.pathname === "/login"){
@@ -81,7 +100,7 @@ class App extends React.Component {
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer user={this.state.user}/>
+    return <ProfileContainer user={this.state.user} token={this.state.token} addNewEpisode={this.addNewEpisode} />
   }
 
   render(){

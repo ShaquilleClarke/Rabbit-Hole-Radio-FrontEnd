@@ -1,20 +1,28 @@
 import React, {Component} from 'react'
+import Episode from './Episode.js'
 import NewEpisodeForm from './NewEpisodeForm.js'
 
 class ProfileContainer extends Component {
 
-    
 
-    addNewEpisode = (epData) => {
-        console.log(epData)
-    }
+        
+
     render() {
         
-        // let {id, username, episodes} = this.props.user
+        let {username, episodes} = this.props.user
         return (
             <div>
-                <h1>Wah Gwan</h1>
-                <NewEpisodeForm addNewEpisode={this.addNewEpisode} />
+                <h1>Wah Gwan {username}!</h1>
+                <h2>Episodes</h2>
+                <ol>
+                    {
+                        episodes.map(episode => {
+                            return <Episode key={episode.id} episodes={episode} />
+                        })
+                    }
+                </ol>
+
+                <NewEpisodeForm token={this.props.token} addNewEpisode={this.addNewEpisode} />
             </div>
         )
     }
