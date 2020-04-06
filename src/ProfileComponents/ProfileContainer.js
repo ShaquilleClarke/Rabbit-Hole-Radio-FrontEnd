@@ -13,6 +13,7 @@ class ProfileContainer extends Component {
         return (
             <div>
                 <h1>Wah Gwan {username}!</h1>
+                <NewEpisodeForm token={this.props.token} addNewEpisode={this.props.addNewEpisode} />
                 <h2>Episodes</h2>
                 <ol>
                     {
@@ -21,8 +22,6 @@ class ProfileContainer extends Component {
                         })
                     }
                 </ol>
-
-                <NewEpisodeForm token={this.props.token} addNewEpisode={this.addNewEpisode} />
             </div>
         )
     }
