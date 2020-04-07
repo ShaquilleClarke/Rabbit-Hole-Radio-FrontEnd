@@ -5,7 +5,8 @@ import NewSegmentForm from './NewSegmentForm.js'
 class Episode extends Component {
 
     state = {
-        segments: []
+        segments: [],
+        clicked: false
     }
 
     componentDidMount() {
@@ -24,26 +25,44 @@ class Episode extends Component {
         this.props.deleteEpisode(id)
     }
 
-    linkToForm = (e) => {
-        console.log('clicked')
+    renderSegment = (e) => {
+        this.setState({
+            clicked: !false
+        })
     }
+
+
+
 
     render() {
         let {title, air_date} = this.props.episodes
         // let {segment} = this.state.segments
+
+        let {clicked} = this.state
+        // const segConditional = {clicked !== false ? (
+        //     <div>
+        //         <NewSegmentForm addNewSegment={this.addNewSegment} />
+        //         {/* <div>
+        //             {segment.map(segObj => {
+        //                 return <Segments key={segObj.id} segments={segObj} />
+        //             })}
+        //         </div> */}
+        //     </div>) : null}
         return (
             <div>
                 <li>{title} - {air_date}</li>
+                <button onClick={this.renderSegment} >Delete Episode</button>
                 <button onClick={this.linkToForm} > Add Segment</button>
-                <br />
-                <button onClick={this.handleDelete} >Delete Episode</button>
-                {/* <div>
-                    {segment.map(segObj => {
-                        return <Segments key={segObj.id} segments={segObj} />
-                    })}
-                </div> */}
+                <div>
+                    <NewSegmentForm addNewSegment={this.addNewSegment} />
+                    {/* <div>
+                        {segment.map(segObj => {
+                            return <Segments key={segObj.id} segments={segObj} />
+                        })}
+                    </div> */}
+                </div>
 
-                <NewSegmentForm addNewSegment={this.addNewSegment} />
+
             </div>
                 
         )

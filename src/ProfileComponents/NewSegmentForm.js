@@ -4,7 +4,8 @@ import React, { Component } from 'react'
 class NewSegment extends Component {
 
     state = {
-        files: []
+        title: "",
+        song_file: []
     }
 
     handleSubmit = (fileData) => {
@@ -12,13 +13,21 @@ class NewSegment extends Component {
         // this.props.addNewSegment()
     }
 
+    handleChange = (e) => {
+        let {name, value} = e.target
+        this.setState({
+            [name]: value
+        })
+    }
+
+
 
     render() {
         return (
-            <div>
-                
+            <form>
+                <input type="text" autoComplete="off" name="title" placeholder="title" value={this.state.title} onChange={this.handleChange} />
 
-            </div>
+            </form>
         )
     }
 }
