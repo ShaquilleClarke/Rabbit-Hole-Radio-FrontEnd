@@ -7,6 +7,7 @@ import Home from './Components/Home.js'
 import ProfileContainer from './ProfileComponents/ProfileContainer.js'
 import './style.css'
 
+
 class App extends React.Component {
 
   state={
@@ -54,6 +55,30 @@ class App extends React.Component {
     })
   }
 
+  
+  deleteEpisode = (epData) => {
+    fetch(`http://localhost:3000/episodes/${epData}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(r => r.json())
+    .then(resp => {
+      let filteredArray = this.state.user.episodes.filter(keepThese => {
+        return keepThese.id !== resp.id
+      })
+      this.setState({
+        user: {
+          ...this.state.user,
+          episodes: [...this.state.user.episodes, filteredArray]
+        }
+      })
+    })
+  }
+    
+
+
   handleLoginSubmit = (userInfo) => {
     console.log("Login form has been submitted")
 
@@ -100,7 +125,7 @@ class App extends React.Component {
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer user={this.state.user} token={this.state.token} addNewEpisode={this.addNewEpisode} />
+    return <ProfileContainer user={this.state.user} token={this.state.token} addNewEpisode={this.addNewEpisode} deleteEpisode={this.deleteEpisode} />
   }
 
   render(){
