@@ -25,11 +25,19 @@ class Episode extends Component {
         this.props.deleteEpisode(id)
     }
 
-    renderSegment = (e) => {
+    renderForm = (e) => {
         this.setState({
             clicked: !false
         })
     }
+
+    cancelForm = (cancel) => {
+        this.setState({
+            clicked: cancel
+        })
+    }
+
+    
 
 
 
@@ -39,31 +47,26 @@ class Episode extends Component {
         // let {segment} = this.state.segments
 
         let {clicked} = this.state
-        // const segConditional = {clicked !== false ? (
-        //     <div>
-        //         <NewSegmentForm addNewSegment={this.addNewSegment} />
-        //         {/* <div>
-        //             {segment.map(segObj => {
-        //                 return <Segments key={segObj.id} segments={segObj} />
-        //             })}
-        //         </div> */}
-        //     </div>) : null}
+
+        const segConditional = clicked === !false ? (
+            <div>
+                <NewSegmentForm addNewSegment={this.addNewSegment} cancelForm={this.cancelForm} />
+                {/* <div>
+                    {segment.map(segObj => {
+                        return <Segments key={segObj.id} segments={segObj} />
+                    })}
+                </div> */}
+            </div>) : null
+            
         return (
             <div>
                 <li>{title} - {air_date}</li>
-                <button onClick={this.renderSegment} >Delete Episode</button>
-                <button onClick={this.linkToForm} > Add Segment</button>
-                <div>
-                    <NewSegmentForm addNewSegment={this.addNewSegment} />
-                    {/* <div>
-                        {segment.map(segObj => {
-                            return <Segments key={segObj.id} segments={segObj} />
-                        })}
-                    </div> */}
-                </div>
-
-
+                <button onClick={this.handleDelete} >Delete Episode</button>
+                <button onClick={this.renderForm} > Add Segment</button>
+                {segConditional}
             </div>
+
+
                 
         )
     }

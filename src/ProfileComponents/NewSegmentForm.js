@@ -5,6 +5,7 @@ class NewSegment extends Component {
 
     state = {
         title: "",
+        cancel: false,
         song_file: []
     }
 
@@ -20,12 +21,19 @@ class NewSegment extends Component {
         })
     }
 
+    handleCancel = (e) => {
+        let {cancel} = this.state
+        this.props.cancelForm(cancel)
+    }
+    
+
 
 
     render() {
         return (
             <form>
                 <input type="text" autoComplete="off" name="title" placeholder="title" value={this.state.title} onChange={this.handleChange} />
+                <button onClick={this.handleCancel} >Cancel</button>
 
             </form>
         )
