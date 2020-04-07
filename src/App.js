@@ -58,7 +58,7 @@ class App extends React.Component {
   
   deleteEpisode = (epData) => {
     fetch(`http://localhost:3000/episodes/${epData}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         'Content-Type': 'application/json'
       }
@@ -71,7 +71,7 @@ class App extends React.Component {
       this.setState({
         user: {
           ...this.state.user,
-          episodes: [...this.state.user.episodes, filteredArray]
+          episodes: filteredArray
         }
       })
     })

@@ -36,6 +36,10 @@ class NewEpisodeForm extends Component {
                 console.log("OHHHHH NOOOOO")
             }
         })
+        this.setState({
+            title: "",
+            air_date: ""
+        })
     }
 
     
