@@ -16,9 +16,6 @@ class Episode extends Component {
     addNewSegment = (fileData) => {
         fetch('http://localhost:3000/segments', {
             method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
             body: JSON.stringify(fileData)
         })
         .then(r => r.json())
