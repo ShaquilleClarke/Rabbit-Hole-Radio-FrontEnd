@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 
+
+
 class NewSegment extends Component {
 
     state = {
@@ -9,9 +11,13 @@ class NewSegment extends Component {
         song_file: []
     }
 
-    handleSubmit = (fileData) => {
-        console.log(fileData)
-        // this.props.addNewSegment()
+    handleSubmit = (e) => {
+        e.preventDefault()
+        let {title, song_file} = this.state
+        let episode_id = this.props.epID
+        let fileData = {title, song_file, episode_id}
+        
+        this.props.addNewSegment(fileData)
     }
 
     handleChange = (e) => {
@@ -31,13 +37,25 @@ class NewSegment extends Component {
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleSubmit} >
                 <input type="text" autoComplete="off" name="title" placeholder="title" value={this.state.title} onChange={this.handleChange} />
+
+                <input type="file" accept="audio/*" name="song_file" value={this.state.song_file} onChange={this.handleChange}  />
+                <input type="submit" value="Create New Segment" />
                 <button onClick={this.handleCancel} >Cancel</button>
+                
+                
 
             </form>
         )
     }
+   
+      
+    
+
 }
 
 export default NewSegment
+
+
+

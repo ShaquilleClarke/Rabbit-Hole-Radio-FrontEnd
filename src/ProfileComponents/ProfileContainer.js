@@ -18,7 +18,7 @@ class ProfileContainer extends Component {
                 <ol>
                     {
                         episodes.map(episode => {
-                            return <Episode key={episode.id} episodes={episode} deleteEpisode={this.props.deleteEpisode} />
+                            return <Episode key={episode.id} episodes={episode} iD={episode.id} deleteEpisode={this.props.deleteEpisode} />
                         })
                     }
                 </ol>

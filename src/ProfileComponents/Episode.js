@@ -13,10 +13,16 @@ class Episode extends Component {
         // fetch to episodes url and set state to contain episodes with segments
     }
 
-    addNewSegment = (e) => {
-        // let {id} = this.props.episodes
-        //fetch to  segment url and return segment
-        console.log("clicked")
+    addNewSegment = (fileData) => {
+        fetch('http://localhost:3000/segments', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(fileData)
+        })
+        .then(r => r.json())
+        .then(console.log)
         
     }
 
@@ -50,7 +56,8 @@ class Episode extends Component {
 
         const segConditional = clicked === !false ? (
             <div>
-                <NewSegmentForm addNewSegment={this.addNewSegment} cancelForm={this.cancelForm} />
+                <br/>
+                <NewSegmentForm epID={this.props.iD} addNewSegment={this.addNewSegment} cancelForm={this.cancelForm} />
                 {/* <div>
                     {segment.map(segObj => {
                         return <Segments key={segObj.id} segments={segObj} />
@@ -61,8 +68,8 @@ class Episode extends Component {
         return (
             <div>
                 <li>{title} - {air_date}</li>
-                <button onClick={this.handleDelete} >Delete Episode</button>
                 <button onClick={this.renderForm} > Add Segment</button>
+                <button onClick={this.handleDelete} >Delete Episode</button>
                 {segConditional}
             </div>
 
