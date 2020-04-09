@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-// import Segments from './Segments.js'
+import Segments from './Segments.js'
 import NewSegmentForm from './NewSegmentForm.js'
+
 
 class Episode extends Component {
 
@@ -13,15 +14,12 @@ class Episode extends Component {
         // fetch to episodes url and set state to contain episodes with segments
     }
 
-    addNewSegment = (fileData) => {
-        fetch('http://localhost:3000/segments', {
-            method: "POST",
-            body: JSON.stringify(fileData)
+    addNewSegment = (newSegment) => {
+        this.setState({
+            segments: [...this.state.segments, newSegment]
         })
-        .then(r => r.json())
-        .then(console.log)
-        
     }
+        
 
     handleDelete = (e) => {
         let {id} = this.props.episodes
@@ -47,19 +45,20 @@ class Episode extends Component {
 
     render() {
         let {title, air_date} = this.props.episodes
-        let {segment} = this.state.segments
-
+        let {segments} = this.state
         let {clicked} = this.state
+        console.log(segments)
+
 
         const segConditional = clicked === !false ? (
             <div>
                 <br/>
                 <NewSegmentForm epID={this.props.iD} addNewSegment={this.addNewSegment} cancelForm={this.cancelForm} />
-                {/* <div> */}
-                    {/* {segment.map(segObj => {
-                        return <Segments key={segObj.id} segments={segObj} /> */}
-                    {/* })} */}
-                {/* </div> */}
+                <div>
+                    {segments.map(segObj => {
+                        return <Segments key={segObj.id} segment={segObj} />
+                    })} 
+                </div>
             </div>) : null
             
         return (

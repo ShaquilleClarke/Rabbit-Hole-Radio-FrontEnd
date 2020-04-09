@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 
 class Segments extends Component {
 
-    state = {
-        segments: []
-    }
+    // state = {
+    //     segments: []
+    // }
+
     render() {
+
+        let {segment} = this.props
+
         return (
             <div>
-                <h1>Segments go here</h1>
+                {/* <li>{segment.video}</li> */}
             </div>
         )
     }

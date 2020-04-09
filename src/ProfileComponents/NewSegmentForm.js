@@ -26,8 +26,10 @@ class NewSegment extends Component {
             body: form
         })
         .then(r => r.json())
-        .then(console.log)
-        // this.props.addNewSegment(fileData)
+        .then((fileData) => {
+            this.props.addNewSegment(fileData)
+        })
+
 
 
     }
