@@ -9,24 +9,21 @@ class NewSegment extends Component {
 
     state = {
         cancel: false,
-        song_file: []
+        video: {}
     }
 
 
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const formData = new FormData()
-        const {song_file} = this.state
-        // console.log(song_file)
-        formData.append('file', song_file)
+        const form = new FormData()
+        const {video} = this.state
+        // console.log(video)
+        form.append('video', video)
+        form.append('episode_id', this.props.epID)
         fetch('http://localhost:3000/segments', {
             method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'content-type': 'multipart/form-data'
-            },
-            body: formData
+            body: form
         })
         .then(r => r.json())
         .then(console.log)
@@ -40,9 +37,11 @@ class NewSegment extends Component {
     
 
     handleChange = (e) => {
-        
-        this.setState({
-            song_file: e.target.files[0]
+        e.persist()
+        this.setState(() => {
+            return {
+                [e.target.name]: e.target.files[0]
+            }
         })
     }
 
@@ -58,7 +57,7 @@ class NewSegment extends Component {
         return (
             <form onSubmit={this.handleSubmit} >
                 
-                <input type="file" accept="audio/*" name="song_file"  onChange={this.handleChange}  />
+                <input type="file" name="video" accept="video/*" onChange={this.handleChange}  />
                 <input type="submit" value="Create New Segment" />
                 <button onClick={this.handleCancel} >Cancel</button>
 
