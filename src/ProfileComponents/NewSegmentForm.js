@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 
 
 
+
 class NewSegment extends Component {
 
     state = {
@@ -11,25 +12,37 @@ class NewSegment extends Component {
         song_file: []
     }
 
-    onDrop = (files) => {
-        console.log(files)
-    }
 
-    handleSubmit = (file, title) => {
+
+    handleSubmit = (e) => {
         e.preventDefault()
-        // let {title, song_file} = this.state
-        // let episode_id = this.props.epID
-        // let fileData = {title, song_file, episode_id}
-        
+        const formData = new FormData()
+        const {song_file} = this.state
+        // console.log(song_file)
+        formData.append('file', song_file)
+        fetch('http://localhost:3000/segments', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'content-type': 'multipart/form-data'
+            },
+            body: formData
+        })
+        .then(r => r.json())
+        .then(console.log)
         // this.props.addNewSegment(fileData)
 
 
     }
 
+    
+    
+    
+
     handleChange = (e) => {
-        let {name, value} = e.target
+        
         this.setState({
-            [name]: value
+            song_file: e.target.files[0]
         })
     }
 
@@ -45,7 +58,7 @@ class NewSegment extends Component {
         return (
             <form onSubmit={this.handleSubmit} >
                 
-                <input type="file" accept="audio/*" name="song_file" value={this.state.song_file} onChange={this.handleChange}  />
+                <input type="file" accept="audio/*" name="song_file"  onChange={this.handleChange}  />
                 <input type="submit" value="Create New Segment" />
                 <button onClick={this.handleCancel} >Cancel</button>
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Segments from './Segments.js'
+// import Segments from './Segments.js'
 import NewSegmentForm from './NewSegmentForm.js'
 
 class Episode extends Component {
@@ -47,7 +47,7 @@ class Episode extends Component {
 
     render() {
         let {title, air_date} = this.props.episodes
-        // let {segment} = this.state.segments
+        let {segment} = this.state.segments
 
         let {clicked} = this.state
 
@@ -55,11 +55,11 @@ class Episode extends Component {
             <div>
                 <br/>
                 <NewSegmentForm epID={this.props.iD} addNewSegment={this.addNewSegment} cancelForm={this.cancelForm} />
-                {/* <div>
-                    {segment.map(segObj => {
-                        return <Segments key={segObj.id} segments={segObj} />
-                    })}
-                </div> */}
+                {/* <div> */}
+                    {/* {segment.map(segObj => {
+                        return <Segments key={segObj.id} segments={segObj} /> */}
+                    {/* })} */}
+                {/* </div> */}
             </div>) : null
             
         return (
