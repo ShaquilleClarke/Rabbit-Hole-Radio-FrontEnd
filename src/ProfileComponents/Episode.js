@@ -3,6 +3,9 @@ import Segments from './Segments.js'
 import NewSegmentForm from './NewSegmentForm.js'
 
 
+
+
+
 class Episode extends Component {
 
     state = {
@@ -79,6 +82,8 @@ class Episode extends Component {
         
         let {clicked} = this.state
        
+
+        
         
 
         const segConditional = clicked === !false ? (
@@ -98,15 +103,20 @@ class Episode extends Component {
 
         return (
             <div>
-                <li>{title} - {air_date} {renderAdd} {renderDelete} </li> 
+                <h3>{title} - {air_date} {renderAdd} {renderDelete} </h3> 
                 <div>
                     {this.state.segments.map(segObj => {
                         return <Segments key={segObj.id} segment={segObj} deleteSegment={this.deleteSegment} />
-                    })}
-                    
+                        })}
+                                
                 </div>
                 {segConditional}
             </div>
+                
+
+                        
+
+                
 
 
                 

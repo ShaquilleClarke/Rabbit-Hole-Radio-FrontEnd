@@ -10,7 +10,8 @@ class NewSegment extends Component {
     state = {
         cancel: false,
         video: {},
-        title: ""
+        title: "",
+        
     }
 
     componentDidMount() {
@@ -74,6 +75,9 @@ class NewSegment extends Component {
 
 
     render() {
+
+        
+
         let {title} = this.state
         return (
             <form onSubmit={this.handleSubmit} >
