@@ -10,9 +10,19 @@ class Episode extends Component {
         clicked: false
     }
 
+    
     componentDidMount() {
-        // fetch to episodes url and set state to contain episodes with segments
+        fetch('http://localhost:3000/segments')
+        .then(r => r.json())
+        .then(segments => {
+            this.setState({
+                segments: segments
+            })
+        })
     }
+    
+
+    
 
     addNewSegment = (newSegment) => {
         this.setState({
@@ -38,6 +48,27 @@ class Episode extends Component {
         })
     }
 
+    deleteSegment = (id) => {
+        fetch(`http://localhost:3000/segments/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(r => r.json())
+        .then(notThis => {
+            
+            let filteredArray = this.state.segments.filter(keepThese => {
+                return keepThese.id !== notThis.id 
+            })
+            
+            this.setState({
+                segments: filteredArray
+            })
+        })
+    }
+
+
     
 
 
@@ -45,27 +76,35 @@ class Episode extends Component {
 
     render() {
         let {title, air_date} = this.props.episodes
-        let {segments} = this.state
+        
         let {clicked} = this.state
-        console.log(segments)
-
+       
+        
 
         const segConditional = clicked === !false ? (
             <div>
                 <br/>
                 <NewSegmentForm epID={this.props.iD} addNewSegment={this.addNewSegment} cancelForm={this.cancelForm} />
-                <div>
-                    {segments.map(segObj => {
-                        return <Segments key={segObj.id} segment={segObj} />
-                    })} 
-                </div>
             </div>) : null
-            
+    
+
+        
+
+        const renderDelete = <button onClick={this.handleDelete} >Delete Episode</button>
+        
+        const renderAdd =  <button onClick={this.renderForm} > Add Segments</button>
+
+        console.log(this.state.segments)
+
         return (
             <div>
-                <li>{title} - {air_date}</li>
-                <button onClick={this.renderForm} > Add Segment</button>
-                <button onClick={this.handleDelete} >Delete Episode</button>
+                <li>{title} - {air_date} {renderAdd} {renderDelete} </li> 
+                <div>
+                    {this.state.segments.map(segObj => {
+                        return <Segments key={segObj.id} segment={segObj} deleteSegment={this.deleteSegment} />
+                    })}
+                    
+                </div>
                 {segConditional}
             </div>
 

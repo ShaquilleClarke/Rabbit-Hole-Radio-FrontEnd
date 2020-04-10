@@ -125,7 +125,7 @@ class App extends React.Component {
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer user={this.state.user} token={this.state.token} addNewEpisode={this.addNewEpisode} deleteEpisode={this.deleteEpisode} />
+    return <ProfileContainer user={this.state.user} token={this.state.token} addNewEpisode={this.addNewEpisode} deleteEpisode={this.deleteEpisode} handleResp={this.handleResp} />
   }
 
   render(){
