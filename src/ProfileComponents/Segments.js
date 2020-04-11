@@ -52,12 +52,19 @@ class Segments extends Component {
         })
     }
 
+    playAgain = (e) => {
+        this.music.play()
+        this.setState({
+            music: "playing"
+        })
+    }
+
     render() {
 
         const currentTime = getTime(this.state.currentTime)
         const duration = getTime(this.state.duration)
 
-        const renderDelete = <button onClick={this.handleDelete} >Delete Segment</button>
+        const renderDelete = <button onClick={this.handleDelete} >Delete</button>
         let {title} = this.props.segment
 
 
@@ -68,7 +75,7 @@ class Segments extends Component {
         )
       
         const buttonToPause = (
-            <button className="ui labelled icon red button" onClick={this.setMusicToPause}>
+            <button className="ui labelled icon red button" onClick={this.setMusicToPause} onDoubleClick={this.playAgain} >
                 <i className="large pause circle outline icon"/>Pause</button>
         )
       

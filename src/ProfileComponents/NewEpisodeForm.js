@@ -47,12 +47,12 @@ class NewEpisodeForm extends Component {
     render() {
         return (
         <form onSubmit={this.handleSubmit}>
-            <label> Create Episode   </label>
+            <label> New Playlist   </label>
 
             
             <input type="text" autoComplete="off" name="title" placeholder="episode-title" value={this.state.title} onChange={this.handleChange} />
             <input type="date" name="air_date" value={this.state.air_date} placeholder="air-date" min="2018-04-01" max="2021-01-01" onChange={this.handleChange} />
-            <input type="submit" value="Create New Episode" />
+            <input type="submit" value="Create" />
         </form>
 
         )

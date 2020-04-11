@@ -70,6 +70,20 @@ class NewSegment extends Component {
         let {cancel} = this.state
         this.props.cancelForm(cancel)
     }
+
+    clearText = () => {
+        this.setState({
+            title: ""
+        })
+    }
+
+    clearEverything = (e) => {
+        e.preventDefault()
+        this.setState({
+            video: {},
+            title: ""
+        })
+    }
     
    
 
@@ -82,10 +96,10 @@ class NewSegment extends Component {
         return (
             <form onSubmit={this.handleSubmit} >
                 
-                <input type="text" name="title" value={title}  placeholder="title" onChange={this.textOnChange} />
-                <input type="file" name="video" accept="video/*" onChange={this.onUpload}  />
+                <input type="text" name="title" value={title}  placeholder="title" onChange={this.textOnChange} onDoubleClick={this.clearText} />
+                <input type="file" name="video" accept="video/*" onChange={this.onUpload} onDoubleClick={this.clearEverything} />
                 <input type="submit" value="Create New Segment"  />
-                <button onClick={this.handleCancel} >Cancel</button>
+                <button onClick={this.handleCancel} >Close</button>
 
             </form>
                 

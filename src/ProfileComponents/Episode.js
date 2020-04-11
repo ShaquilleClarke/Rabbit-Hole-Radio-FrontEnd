@@ -18,6 +18,8 @@ class Episode extends Component {
         fetch('http://localhost:3000/segments')
         .then(r => r.json())
         .then(segments => {
+
+
             this.setState({
                 segments: segments
             })
@@ -95,9 +97,9 @@ class Episode extends Component {
 
         
 
-        const renderDelete = <button onClick={this.handleDelete} >Delete Episode</button>
+        const renderDelete = <button onClick={this.handleDelete} >Delete Playlist</button>
         
-        const renderAdd =  <button onClick={this.renderForm} > Add Segments</button>
+        const renderAdd =  <button onClick={this.renderForm} > Add Content</button>
 
         console.log(this.state.segments)
 

@@ -14,7 +14,7 @@ class ProfileContainer extends Component {
             <div>
                 <h1>Wah Gwan {username}!</h1>
                 <NewEpisodeForm token={this.props.token} addNewEpisode={this.props.addNewEpisode} />
-                <h2>Episodes</h2>
+                <h2>Playlist</h2>
                 <ol>
                     {
                         episodes.map(episode => {
