@@ -31,6 +31,8 @@ class NewSegment extends Component {
         form.append('video', video)
         form.append('episode_id', this.props.epID)
         form.append('title', title)
+        console.log(form)
+        // debugger
         fetch('http://localhost:3000/segments', {
             method: "POST",
             body: form

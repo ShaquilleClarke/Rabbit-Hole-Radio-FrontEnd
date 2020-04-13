@@ -15,15 +15,15 @@ class Episode extends Component {
 
     
     componentDidMount() {
-        fetch('http://localhost:3000/segments')
-        .then(r => r.json())
-        .then(segments => {
+        // fetch('http://localhost:3000/segments')
+        // .then(r => r.json())
+        // .then(segments => {
 
 
-            this.setState({
-                segments: segments
-            })
-        })
+        //     this.setState({
+        //         segments: segments
+        //     })
+        // })
     }
     
 
