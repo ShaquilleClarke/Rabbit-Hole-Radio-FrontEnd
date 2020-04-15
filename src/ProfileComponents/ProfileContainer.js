@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Episode from './Episode.js'
 import NewEpisodeForm from './NewEpisodeForm.js'
 
+
 class ProfileContainer extends Component {
 
 
@@ -11,10 +12,30 @@ class ProfileContainer extends Component {
         
         let {username, episodes} = this.props.user
         return (
+            
+                
+
             <div>
-                <h1>Wah Gwan {username}!</h1>
+                {/* <video
+                 autoPlay
+                 loop
+                 muted
+                 styled={{
+                    position: "absolute",
+                    width: "100%",
+                    left: "50%",
+                    top: "50%",
+                    height: "100%",
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: "-1"
+                 }}
+                  >
+                    <source src={AstroBoy} type="video/mp4" />
+                </video> */}
+                <h1 align="center" >Wah Gwan {username}!</h1>
                 <NewEpisodeForm token={this.props.token} addNewEpisode={this.props.addNewEpisode} />
-                <h2>Playlist</h2>
+                <h2 align="center" >Episodes</h2>
                 <ol>
                     {
                         episodes.map(episode => {
@@ -23,6 +44,7 @@ class ProfileContainer extends Component {
                     }
                 </ol>
             </div>
+            
         )
     }
 }

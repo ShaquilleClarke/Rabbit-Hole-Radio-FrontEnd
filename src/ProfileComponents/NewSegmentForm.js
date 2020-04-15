@@ -96,7 +96,7 @@ class NewSegment extends Component {
 
         let {title} = this.state
         return (
-            <form onSubmit={this.handleSubmit} >
+            <form align="center" onSubmit={this.handleSubmit} >
                 
                 <input type="text" name="title" value={title}  placeholder="title" onChange={this.textOnChange} onDoubleClick={this.clearText} />
                 <input type="file" name="video" accept="video/*" onChange={this.onUpload} onDoubleClick={this.clearEverything} />

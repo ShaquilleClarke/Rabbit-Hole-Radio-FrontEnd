@@ -6,6 +6,8 @@ import NavBar from './Components/NavBar.js'
 import Home from './Components/Home.js'
 import ProfileContainer from './ProfileComponents/ProfileContainer.js'
 import './style.css'
+import './ProfileComponents/App.css'
+// import AstroBoy from './ProfileComponents/AstroBoy.mp4'
 
 
 class App extends React.Component {

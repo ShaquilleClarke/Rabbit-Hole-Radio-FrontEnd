@@ -4,7 +4,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1 className="header">Rabbit Hole Radio</h1>
+            <h1  align="center" className="header">Rabbit Hole Radio</h1>
         </div>
 
     )

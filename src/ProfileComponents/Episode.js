@@ -97,14 +97,14 @@ class Episode extends Component {
 
         
 
-        const renderDelete = <button onClick={this.handleDelete} >Delete Playlist</button>
+        const renderDelete = <button onClick={this.handleDelete} >Delete Episode</button>
         
         const renderAdd =  <button onClick={this.renderForm} > Add Content</button>
 
         console.log(this.state.segments)
 
         return (
-            <div>
+            <div align="center" >
                 <h3>{title} - {air_date} {renderAdd} {renderDelete} </h3> 
                 <div>
                     {this.state.segments.map(segObj => {

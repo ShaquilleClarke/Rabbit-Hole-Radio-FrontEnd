@@ -46,8 +46,8 @@ class NewEpisodeForm extends Component {
 
     render() {
         return (
-        <form onSubmit={this.handleSubmit}>
-            <label> New Playlist   </label>
+        <form  align="center" onSubmit={this.handleSubmit}>
+            <label> New Episode   </label>
 
             
             <input type="text" autoComplete="off" name="title" placeholder="episode-title" value={this.state.title} onChange={this.handleChange} />
